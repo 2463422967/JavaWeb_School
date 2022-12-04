@@ -15,6 +15,15 @@ public class User {
     private String tp;
     private String bz;
     private int classid;
+    private int collegeid;
+
+    public int getCollegeid() {
+        return collegeid;
+    }
+
+    public void setCollegeid(int collegeid) {
+        this.collegeid = collegeid;
+    }
 
     public int getClassid() {
         return classid;

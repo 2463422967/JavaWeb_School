@@ -10,13 +10,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>主页</title>
+    <title>欢迎访问考勤管理系统</title>
 </head>
 <body>
-<table width="100%">
+<table width="100%" cellpadding="0" cellspacing="0">
     <tr>
-        <td rowspan="2" width="10%" height="900px">
-            <iframe src = "left.jsp" width="100%" height="900px" frameborder="1"></iframe>
+        <td rowspan="2" width="15%" height="900px">
+            <iframe src = "left.jsp" width="100%" height="900px" frameborder="0"></iframe>
         </td>
         <td width="78%" height="100px">
             <iframe src="top.jsp" width="100%" height="100px" frameborder="0"></iframe>
@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <td width="78%" height="800px">
-            <iframe src="welcome.jsp" name="main" width="100%" height="800px" frameborder="1"></iframe>
+            <iframe src="welcome.jsp" name="main" width="100%" height="800px" frameborder="0"></iframe>
         </td>
     </tr>
 </table>

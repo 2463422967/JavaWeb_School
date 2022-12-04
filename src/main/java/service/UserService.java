@@ -1,6 +1,6 @@
 package service;
 
-import Bean.User;
+import Bean.*;
 
 import java.util.ArrayList;
 
@@ -14,5 +14,11 @@ import java.util.ArrayList;
 public interface UserService {
     User SelectUserByname(String name, int key);
     User SelectUserByid(String id, int key);
-    ArrayList<User> selectUserList();
+    ArrayList<User> selectUserListByClassid(int classid);
+    ArrayList<User> selectUserListByKeyandXueYuan(int key,int collegeid);
+    ArrayList<KeCheng> selectKeChengListByXueYuan(int collegeid);
+    ArrayList<Class1> selectClassListByCollegeid(int collegeid);
+    ArrayList<XuanKe> SelectKeChengByClassid(int classid);
+    ArrayList<Teacher> SelectKeChengByTeacher(int userid);
+    Boolean AddTeacherXuanKeByUseridandCoursename(String userid,String coursename);
 }

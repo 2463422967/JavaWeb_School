@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Hc
@@ -14,11 +15,11 @@
 </head>
 <script type="text/javascript">
     function reloadImage(t) {
-        t.src="./ImageServlet?flag="+Math.random();
+        t.src="./UserServlet?action=getImage&flag="+Math.random();
     }
 </script>
 <body>
-<form>
+<form method="post" action="./UserServlet?action=Checklogin">
 <div class="container">
     <div class="login-wrapper">
         <div class="header">Login</div>
@@ -31,7 +32,7 @@
                         <input type="text" name="code" placeholder="验证码" class="input-item">
                     </td>
                     <td>
-                        <img src="ImageServlet" align="right" onclick="reloadImage(this)">
+                        <img src="./UserServlet?action=getImage" align="right" onclick="reloadImage(this)">
                     </td>
                 </tr>
             </table>

@@ -1,0 +1,75 @@
+.submit {
+    width: 10%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+.scan{
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    width: 60%;
+    background: #f1f1f1;
+}
+.submit:hover {
+    background-color: #057ad0;
+    color: black;
+}
+.scan:hover{
+    border: 1px solid #559cf3;
+    background: #fcfcfc;
+}
+
+.firstTr{
+    font-size: 35px;
+    font-family: 微软雅黑, serif;
+    background-color: #0398dd;
+    color: white;
+    letter-spacing: 40px;
+}
+
+.twoTr{
+    font-size: 20px;
+    font-family: 微软雅黑, serif;
+    background-color: #0398dd;
+    color: white;
+    letter-spacing: 10px;
+}
+
+a{
+    margin: 8px;
+    text-decoration:none;
+    color: #0398dd;
+    font-size: 20px;
+}
+
+a:hover{
+    color: #3131fa;
+}
+
+td{
+    /*border-bottom-style: solid;   底下有一条线   */
+    background-color: #f3f3f3;
+    padding: 10px 10px 4px;
+}
+
+.butt{
+    width: 20%;
+    padding: 5px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.butt:hover{
+    background-color: #057ad0;
+    color: black;
+}

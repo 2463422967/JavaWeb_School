@@ -7,7 +7,7 @@ package Bean;
  * @Date: 2022/11/30 6:54
  * @Version: 1.0
  */
-public class Class {
+public class Class1 {
     private int classid;
     private String classname;
 

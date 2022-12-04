@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @Date: 2022/11/12 20:28
  * @Version: 1.0
  */
-public class UserDAO {
+public class UserDAO extends util.GetConn{
     private Connection conn = null;
     private String sql = "";
     private PreparedStatement pstmt;
@@ -24,19 +24,45 @@ public class UserDAO {
     private ArrayList <User> users = new ArrayList<User>();
     private User user;
 
-    private Connection getConn(){
+    public User selectUsernameByuserid(int userid){
+        conn=super.getConn(conn);
+        sql="select * from user where userid=?";
         try {
-            if ((conn==null) || conn.isClosed()){
-                DB db = new DB();
-                conn = db.getConn();
-            }
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,userid);
+            rs = pstmt.executeQuery();
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return conn;
+        return getByRS(rs).get(0);
+    }
+    public ArrayList<User> selectUserListByKeyandXueYuan(int key,int collegeid){
+        conn=super.getConn(conn);
+        sql="select * from user where `key` = ? and collegeid=?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,key);
+            pstmt.setInt(2,collegeid);
+            rs = pstmt.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return getByRS(rs);
+    }
+    public ArrayList<User> selectUserListByClassid(int classid){
+        conn=super.getConn(conn);
+        sql="select * from user where classid = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,classid);
+            rs = pstmt.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return getByRS(rs);
     }
     public ArrayList<User> selectUserList(int key){
-        getConn();
+        conn=super.getConn(conn);
         sql="select * from user where `key` = ?";
         try {
             pstmt = conn.prepareStatement(sql);
@@ -60,8 +86,10 @@ public class UserDAO {
                     user.setUsername(rs.getString("username"));
                     user.setPassword(rs.getString("password"));
                     user.setKey(rs.getInt("key"));
+                    user.setClassid(rs.getInt("classid"));
                     user.setTp(rs.getString("tp"));
-                    user.setBz(rs.getString("bz"));
+                    user.setBz(rs.getString("beizhu"));
+                    user.setCollegeid(rs.getInt("collegeid"));
                 }catch (Exception e){
                     e.printStackTrace();
                 }

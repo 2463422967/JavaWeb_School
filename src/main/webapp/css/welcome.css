@@ -1,0 +1,30 @@
+.h1{
+    color: red;
+    font-size: 40px;
+    text-align: center;
+}
+
+.realLine{
+    font-size: 20px;
+    color: black;
+}
+.body{
+    background-color: white;
+    /*width: 100%;*/
+}
+
+.line{
+    /*background-color: black ;*/
+    margin: 8px;
+    /*text-decoration:none;*/
+    color: white;
+    font-size: 20px;
+}
+
+a:hover{
+    color: #3131fa;
+}
+
+
+
+
