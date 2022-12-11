@@ -23,7 +23,24 @@ public class XuanKeDAO extends util.GetConn{
     private ResultSet rs;
     private ArrayList<XuanKe> xuanKes = new ArrayList<XuanKe>();
     private XuanKe xuanKe;
-
+    public Boolean AddClassXuanKe(XuanKe xk){
+        conn=super.getConn(conn);
+        sql = "insert into xuanke(userid, username, classid, coursename, courseid, collegeid) values (?,?,?,?,?,?)";
+        int result=0;
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,xk.getUserid());
+            pstmt.setString(2, xk.getUsername());
+            pstmt.setInt(3, xk.getClassid());
+            pstmt.setString(4, xk.getCoursename());
+            pstmt.setInt(5, xk.getCourseid());
+            pstmt.setInt(6, xk.getCollegeid());
+            result = pstmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result > 0;
+    }
     public ArrayList<XuanKe> SelectKeChengByClassid(int classid){
         conn = super.getConn(conn);
         sql="select * from xuanke where classid=?";

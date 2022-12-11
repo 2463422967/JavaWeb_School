@@ -1,6 +1,7 @@
 package Dao;
 
 import Bean.Class1;
+import Bean.KeCheng;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,17 +23,47 @@ public class ClassDao extends util.GetConn{
     private ResultSet rs;
     private ArrayList<Class1> classes = new ArrayList<Class1>();
     private Class1 aClass;
-//    private Connection getConn(){
-//        try {
-//            if ((conn==null) || conn.isClosed()){
-//                DB db = new DB();
-//                conn = db.getConn();
-//            }
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//        }
-//        return conn;
-//    }
+    public Boolean UpdateClassByclassid(int classid,String classname){
+        conn=super.getConn(conn);
+        sql = "update banji set classname=? where classid = ?";
+        int result=0;
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,classname);
+            pstmt.setInt(2,classid);
+            result = pstmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result > 0;
+    }
+    public Boolean deleteClassByClassid(int classid){
+        conn=super.getConn(conn);
+        sql = "delete from banji where classid=?";
+        int re =0;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,classid);
+            re = pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return re > 0;
+    }
+    public Boolean AddClassBycollegeid(String classname,int collegeid){
+        conn=super.getConn(conn);
+        sql = "insert into banji(classname, collegeid) values (?,?)";
+        int result=0;
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,classname);
+            pstmt.setInt(2, collegeid);
+            result = pstmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result > 0;
+    }
     public ArrayList<Class1> SelectClassByXueYuan(int collegeid){
         conn=super.getConn(conn);
         sql="select * from banji where collegeid=?";

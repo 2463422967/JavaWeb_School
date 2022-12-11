@@ -25,13 +25,29 @@ public class KeChengDAO extends util.GetConn{
     private ArrayList<KeCheng> keChengs = new ArrayList<KeCheng>();
     private KeCheng keCheng;
 
+    public Boolean deleteCourseByCourseid(int courseid){
+        conn=super.getConn(conn);
+        sql = "delete from kecheng where courseid=?";
+        String sql1 = "delete from teacher where courseid=?";
+        int re =0;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+            pstmt.setInt(1,courseid);
+            pstmt1.setInt(1,courseid);
+            re = pstmt1.executeUpdate();
+            re = pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return re > 0;
+    }
     public Boolean addKeCheng(KeCheng kc){
         conn=super.getConn(conn);
         sql = "insert into kecheng(coursename, collegeid) values (?,?)";
         int result=0;
         try{
             pstmt = conn.prepareStatement(sql);
-//            pstmt.setInt(1,kc.getCourseid());
             pstmt.setString(1,kc.getCoursename());
             pstmt.setInt(2, kc.getCollegeid());
             result = pstmt.executeUpdate();
@@ -52,12 +68,35 @@ public class KeChengDAO extends util.GetConn{
         }
         return getByRS(rs).get(0);
     }
+    public KeCheng SelectCourseByCourseid(int courseid){
+        conn=super.getConn(conn);
+        sql="select * from kecheng where courseid=?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,courseid);
+            rs = pstmt.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return getByRS(rs).get(0);
+    }
     public ArrayList<KeCheng> SelectClassByXueYuan(int collegeid){
         conn=super.getConn(conn);
         sql="select * from kecheng where collegeid=?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,collegeid);
+            rs = pstmt.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return getByRS(rs);
+    }
+    public ArrayList<KeCheng> getAllKeCheng(){
+        conn=super.getConn(conn);
+        sql="select * from kecheng";
+        try {
+            pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
         }catch (SQLException e){
             e.printStackTrace();

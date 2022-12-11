@@ -24,6 +24,18 @@ public class TeacherDAO extends util.GetConn{
     private ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     private Teacher teacher;
 
+    public ArrayList<Teacher> SelectTeacherBycourseid(int courseid){
+        conn = super.getConn(conn);
+        sql="select * from teacher where courseid=?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,courseid);
+            rs = pstmt.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return getByRS(rs);
+    }
     public ArrayList<Teacher> SelectKeChengByTeacher(int userid){
         conn = super.getConn(conn);
         sql="select * from teacher where userid=?";
@@ -35,6 +47,20 @@ public class TeacherDAO extends util.GetConn{
             e.printStackTrace();
         }
         return getByRS(rs);
+    }
+    public Boolean deleteTeacherXuanKeByCourseid(int courseid,String userid){
+        conn=super.getConn(conn);
+        sql = "delete from teacher where courseid=? and userid=?";
+        int re =0;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,courseid);
+            pstmt.setString(2,userid);
+            re = pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return re > 0;
     }
     public Boolean AddTeacherXuanKe(Teacher th){
         conn = super.getConn(conn);
@@ -53,6 +79,21 @@ public class TeacherDAO extends util.GetConn{
         }
         return result > 0;
     }
+    public Boolean UpdateTaecherByuserid(String userid,String username){
+        conn=super.getConn(conn);
+        sql = "update user set username=? where userid = ?";
+        int result=0;
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            pstmt.setString(2,userid);
+            result = pstmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result > 0;
+    }
+    //废弃
     public Teacher selectCollegeidByUserid(int userid){
         conn = super.getConn(conn);
         sql="select * from teacher where userid=?";

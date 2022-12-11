@@ -30,14 +30,14 @@
 <form action="StudentView.jsp" method="post">
   <input type="text" name="keyword" size="80" value="${requestScope.keyword}"placeholder="请输入学院" class="scan">
   <input type="submit" value="搜索" class="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="addStudent.jsp">添加学生</a>
+<%--  <a href="addStudent.jsp">添加学生</a>--%>
 </form>
-<script type="text/javascript">
-  function deleteStudent(id){
-    if (confirm("你确定要删除该学生吗？"))
-      window.location="handle.jsp?action=delete&id="+id;
-  }
-</script>
+<%--<script type="text/javascript">--%>
+<%--  function deleteStudent(id){--%>
+<%--    if (confirm("你确定要删除该学生吗？"))--%>
+<%--      window.location="handle.jsp?action=delete&id="+id;--%>
+<%--  }--%>
+<%--</script>--%>
 <table border="0" width=70% cellpadding="0" cellspacing="0">
   <tr>
     <th colspan="3" ><div class="firstTr">学院</div></th>
@@ -47,8 +47,8 @@
       <td width=70% align="center">
         <a href="./UserServlet?action=SelectKeChengByXueYuan&collegeid=${xy.collegeid}&tzname=kecheng">${xy.collegename}</a>
       </td>
-      <td width=15% align="center"><a href="./UserServlet?action=SelectClassByXueYuan&collegeid=${xy.collegeid}">修改</a></td>
-      <td width=15% align="center"><a href="javascript:void(0);"onclick="deleteBook(${xy.collegeid})">删除</a></td>
+<%--      <td width=15% align="center"><a href="./UserServlet?action=SelectClassByXueYuan&collegeid=${xy.collegeid}">修改</a></td>--%>
+<%--      <td width=15% align="center"><a href="javascript:void(0);"onclick="deleteBook(${xy.collegeid})">删除</a></td>--%>
     </tr>
   </c:forEach>
 </table>

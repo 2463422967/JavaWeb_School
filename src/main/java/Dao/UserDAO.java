@@ -1,5 +1,6 @@
 package Dao;
 
+import Bean.Teacher;
 import Bean.User;
 import util.DB;
 
@@ -23,9 +24,82 @@ public class UserDAO extends util.GetConn{
     private ResultSet rs;
     private ArrayList <User> users = new ArrayList<User>();
     private User user;
+    public Boolean deleteUserByUserid(int userid){
+        conn=super.getConn(conn);
+        sql = "delete from user where userid=?";
+        int re =0;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,userid);
+            re = pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return re > 0;
+    }
+    public Boolean UpdateUsernameByuserid(int userid,String username){
+        conn=super.getConn(conn);
+        sql = "update user set username=? where userid = ?";
+        int result=0;
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            pstmt.setInt(2,userid);
+            result = pstmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result > 0;
+    }
+    public Boolean addUser(int collegeid, String username, String password, String userid,int key){
+        conn=super.getConn(conn);
+        sql = "insert into user(userid, username, password, `key`,collegeid) values (?,?,?,?,?)";
+        int result=0;
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,userid);
+            pstmt.setString(2,username);
+            pstmt.setString(3,password);
+            pstmt.setInt(4,key );
+            pstmt.setInt(5, collegeid);
+            result = pstmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result > 0;
+    }
+    public Boolean addUser(String userid, String username, String password, int classid,int key){
+        conn=super.getConn(conn);
+        sql = "insert into user(userid, username, password, `key`,classid) values (?,?,?,?,?)";
+        int result=0;
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,userid);
+            pstmt.setString(2,username);
+            pstmt.setString(3,password);
+            pstmt.setInt(4,key );
+            pstmt.setInt(5, classid);
+            result = pstmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result > 0;
+    }
 
     public User selectUsernameByuserid(int userid){
         conn=super.getConn(conn);
+        sql="select * from user where userid=?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,userid);
+            rs = pstmt.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return getByRS(rs).get(0);
+    }
+    public User selectCollegeidByUserid(int userid){
+        conn = super.getConn(conn);
         sql="select * from user where userid=?";
         try {
             pstmt = conn.prepareStatement(sql);

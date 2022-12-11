@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Hard_cheng
@@ -8,9 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>添加教授课程</title>
     <link href="css/school inf.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-3.6.1.min.js"></script>
 </head>
+<script type="text/javascript">
+    function add(){
+        var courseid = $("#xlk").val();
+        var coursename = $("#xlk").find("option:selected").text();
+        window.location="./UserServlet?action=AddTeacherXuanKeByUserid&userid=<%=request.getParameter("userid")%>&courseid="
+            +courseid+"&coursename="+coursename;
+    }
+</script>
 <body>
 <input type="button" value="返回上一级" onclick="history.go(-1);" class="butt">
 <form method="post" action="./UserServlet?action=AddTeacherXuanKeByUserid&userid=<%=request.getParameter("userid")%>">
@@ -20,8 +30,18 @@
     <th colspan="2">操作</th>
   </tr>
     <tr>
-      <td width=30% align="center"><input type="text" name="coursename"  value="" class="scan"></td>
-      <td width=20% align="center"><input type="submit" value="添加" size="20" class="submit"></td>
+        <td>
+            <label>
+              <select name="xzkc" id="xlk">
+                  <option value="">请选择课程</option>
+                    <c:forEach items="${kechengs}" var="kc">
+                        <option value=${kc.courseid}>${kc.coursename}</option>
+                    </c:forEach>
+              </select>
+            </label>
+        </td>
+<%--      <td width=20% align="center"><input type="submit" value="添加" size="20" class="submit"></td>--%>
+        <td width=20% align="center"><a href="javascript:void(0);" onclick="add()" style="size: 20px"><input type="" value="添加" size="20" class="submit"></a></td>
     </tr>
 </table>
 </form>

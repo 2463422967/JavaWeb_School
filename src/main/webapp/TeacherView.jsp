@@ -13,9 +13,9 @@
     <link href="css/school inf.css" rel="stylesheet" type="text/css"/>
 </head>
 <script type="text/javascript">
-    function deleteStudent(id){
-        if (confirm("你确定要删除该学生吗？"))
-            window.location="handle.jsp?action=delete&id="+id;
+    function deleteTeacher(userid){
+        if (confirm("你确定要删除该教师吗？"))
+            window.location="./UserServlet?action=deleteUserByUserid&pd=deTeacher&userid="+userid;
     }
 </script>
 <%request.setCharacterEncoding("utf-8");%>
@@ -23,7 +23,7 @@
 <form action="StudentView.jsp" method="post">
     <input type="text" name="keyword" size="80" value="${requestScope.keyword}" class="scan">
     <input type="submit" value="搜索" class="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="addStudent.jsp">添加教师</a>
+    <a href="./UserServlet?action=Tz_addTeacher&collegeid=<%=request.getParameter("collegeid")%>">添加教师</a>
 </form>
 <input type="button" value="返回上一级" onclick="history.go(-1);" class="butt">
 <table border="0" cellpadding="0" cellspacing="0">
@@ -36,9 +36,9 @@
         <tr>
             <td width=50% align="center">${teach.userid}</td>
             <td width=20% align="center">${teach.username}</td>
-            <td width=10% align="center"><a href="./UserServlet?action=SelectKeChengByTeacher&teacherid=${teach.userid}">查看教授课程</a></td>
-            <td width=10% align="center"><a href="handle.jsp?action=selectbyid&id=${teach.userid}">修改</a></td>
-            <td width=10% align="center"><a href="javascript:void(0);"onclick="deleteBook(${teach.userid})">删除</a></td>
+            <td width=10% align="center"><a href="./UserServlet?action=SelectKeChengByTeacher&teacherid=${teach.userid}&collegeid=${teach.collegeid}">查看教授课程</a></td>
+            <td width=10% align="center"><a href="./UserServlet?action=Tz_UpdateTeacher&userid=${teach.userid}&username=${teach.username}">修改</a></td>
+            <td width=10% align="center"><a href="javascript:void(0);" onclick="deleteTeacher(${teach.userid})">删除</a></td>
         </tr>
     </c:forEach>
 </table>

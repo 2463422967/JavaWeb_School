@@ -30,7 +30,6 @@
 <form action="StudentView.jsp" method="post">
   <input type="text" name="keyword" size="80" value="${requestScope.keyword}"placeholder="请输入学院" class="scan">
   <input type="submit" value="搜索" class="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="addStudent.jsp">添加学生</a>
 </form>
 <script type="text/javascript">
   function deleteStudent(id){
@@ -44,11 +43,11 @@
   </tr>
   <c:forEach items="${xys}" var="xy">
     <tr>
-      <td width=70% align="center">
+      <td width=100% align="center">
         <a href="./UserServlet?action=SelectClassByXueYuan&collegeid=${xy.collegeid}&tzname=class1">${xy.collegename}</a>
       </td>
-      <td width=15% align="center"><a href="./UserServlet?action=SelectClassByXueYuan&collegeid=${xy.collegeid}">修改</a></td>
-      <td width=15% align="center"><a href="javascript:void(0);"onclick="deleteBook(${xy.collegeid})">删除</a></td>
+<%--      <td width=15% align="center"><a href="./UserServlet?action=SelectClassByXueYuan&collegeid=${xy.collegeid}">修改</a></td>--%>
+<%--      <td width=15% align="center"><a href="javascript:void(0);"onclick="deleteBook(${xy.collegeid})">删除</a></td>--%>
     </tr>
   </c:forEach>
 </table>
