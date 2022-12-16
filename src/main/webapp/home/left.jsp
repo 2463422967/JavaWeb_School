@@ -18,6 +18,7 @@
             height: 100px;
             background-color: #00B5F9;
             margin: -10px;
+            padding: 2%;
         }
         .h3{
             background-color: #00B5F9;

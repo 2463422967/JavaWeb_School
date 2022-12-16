@@ -30,7 +30,7 @@
 <form action="StudentView.jsp" method="post">
   <input type="text" name="keyword" size="80" value="${requestScope.keyword}"placeholder="请输入学院" class="scan">
   <input type="submit" value="搜索" class="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="AddXueYuanView.jsp">添加学院</a>
+  <a href="AddXueYuanView.jsp" class="submit">添加学院</a>
 </form>
 <script type="text/javascript">
   function deletxy(collegeid){
@@ -45,7 +45,7 @@
   <c:forEach items="${xys}" var="xy">
     <tr>
       <td width=70% align="center">${xy.collegename}</td>
-      <td width=15% align="center"><a href="./UserServlet?action=Tz_UpdateXueYuan&collegeid=${xy.collegeid}&collegename=${xy.collegename}">修改</a></td>
+      <td width=15% align="center" ><a href="./UserServlet?action=Tz_UpdateXueYuan&collegeid=${xy.collegeid}&collegename=${xy.collegename}">修改</a></td>
       <td width=15% align="center"><a href="javascript:void(0);" onclick="deletxy(${xy.collegeid})">删除</a></td>
     </tr>
   </c:forEach>

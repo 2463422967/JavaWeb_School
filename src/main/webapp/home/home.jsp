@@ -16,7 +16,7 @@
 <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
         <td rowspan="2" width="15%" height="900px">
-            <iframe src = "left.jsp" width="100%" height="900px" frameborder="0"></iframe>
+            <iframe src = "<%=session.getAttribute("leftname")%>" width="100%" height="900px" frameborder="0"></iframe>
         </td>
         <td width="78%" height="100px">
             <iframe src="top.jsp" width="100%" height="100px" frameborder="0"></iframe>

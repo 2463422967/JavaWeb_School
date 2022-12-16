@@ -88,7 +88,7 @@ public class ClassDao extends util.GetConn{
         return getByRS(rs);
     }
 
-    public ArrayList<Class1> selectClassNameByid(int classid){
+    public Class1 selectClassByClassid(int classid){
         conn=super.getConn(conn);
         sql = "select * from banji where classid = ?";
         try {
@@ -98,7 +98,7 @@ public class ClassDao extends util.GetConn{
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return getByRS(rs);
+        return getByRS(rs).get(0);
     }
     public ArrayList<Class1> getByRS(ResultSet rs) {
         try {

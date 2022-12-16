@@ -17,11 +17,11 @@
   <table border="0" cellpadding="0" cellspacing="0">
     <tr class="twoTr">
       <th>学院名</th>
-      <th colspan="2">操作</th>
+      <th>操作</th>
     </tr>
     <tr>
       <td width=30% align="center"><input type="text" name="collegename"  value="<%=request.getParameter("collegename")%>" class="scan"></td>
-      <td width=20% align="center"><input type="submit" value="修改" size="20" class="submit"></td>
+      <td width=50% align="center"><input type="submit" value="修改" class="butt"></td>
     </tr>
   </table>
 </form>

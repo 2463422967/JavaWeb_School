@@ -53,6 +53,31 @@ public class XuanKeDAO extends util.GetConn{
         }
         return getByRS(rs);
     }
+    public ArrayList<XuanKe> SelectKeChengByUserid(String userid){
+        conn = super.getConn(conn);
+        sql="select * from xuanke where userid=?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,userid);
+            rs = pstmt.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return getByRS(rs);
+    }
+    public ArrayList<XuanKe> SelectKeChengByUseridadnClassid(String userid,int classid){
+        conn = super.getConn(conn);
+        sql="select * from xuanke where userid=? and classid=?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,userid);
+            pstmt.setInt(2,classid);
+            rs = pstmt.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return getByRS(rs);
+    }
     public ArrayList<XuanKe> getByRS(ResultSet rs) {
         try {
             if (rs == null || !rs.next()){

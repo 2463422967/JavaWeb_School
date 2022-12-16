@@ -5,6 +5,7 @@ import Bean.*;
 import Dao.*;
 import service.UserService;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -21,6 +22,8 @@ public class UserServiceImpl implements UserService {
     private final XuanKeDAO xuanKeDAO = new XuanKeDAO();
     private final XueYuanDAO xueYuanDAO = new XueYuanDAO();
     private final TeacherDAO teacherDAO = new TeacherDAO();
+    private final QianDaoDAO qianDaoDAO = new QianDaoDAO();
+    private final GlbDAO glbDAO = new GlbDAO();
     @Override
     public User SelectUserByname(String name, int key) {
         return null;
@@ -46,6 +49,8 @@ public class UserServiceImpl implements UserService {
         return keChengDAO.SelectClassByXueYuan(collegeid);
     }
 
+
+
     @Override
     public ArrayList<KeCheng> getAllKeCheng() {
         return keChengDAO.getAllKeCheng();
@@ -57,8 +62,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Class1 selectClassByClassid(int classid) {
+        return classDao.selectClassByClassid(classid);
+    }
+
+    @Override
     public ArrayList<XuanKe> SelectKeChengByClassid(int classid) {
         return xuanKeDAO.SelectKeChengByClassid(classid);
+    }
+
+    @Override
+    public ArrayList<XuanKe> SelectKeChengByUserid(String userid) {
+        return xuanKeDAO.SelectKeChengByUserid(userid);
+    }
+
+    @Override
+    public ArrayList<XuanKe> SelectKeChengByUseridadnClassid(String userid, int classid) {
+        return xuanKeDAO.SelectKeChengByUseridadnClassid(userid,classid);
     }
 
     @Override
@@ -67,20 +87,52 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public ArrayList<QianDao> SelectQdByUseridandCourseidandClassid(String userid, int courseid, int classid) {
+        return qianDaoDAO.SelectQdByUseridandCourseidandClassid(userid,courseid,classid);
+    }
+
+    @Override
+    public QianDao SelectQdByQdid(int qdid) {
+        return qianDaoDAO.SelectQdByQdid(qdid);
+    }
+
+    @Override
+    public int selectKeyByuserid(String userid) {
+        return userDAO.selectCollegeidByUserid(userid).getKey();
+    }
+
+    @Override
+    public String selectUsernameByuserid(String userid) {
+        return userDAO.selectUsernameByuserid(userid).getUsername();
+    }
+
+    @Override
     public ArrayList<Teacher> SelectTeacherBycourseid(int courseid) {
         return teacherDAO.SelectTeacherBycourseid(courseid);
+    }
+
+
+
+    @Override
+    public ArrayList<Glb> selectGlbListByClassidandQdid( int classid, int qdid) {
+        return glbDAO.selectGlbListByUseridandClassidandQdid(classid,qdid);
+    }
+
+    @Override
+    public ArrayList<Glb> selectGlbListByUserid(String userid) {
+        return glbDAO.selectGlbListByUserid(userid);
     }
 
     @Override
     public Boolean AddTeacherXuanKeByUseridandCoursename(String userid,String coursename) {
         Teacher th = new Teacher();
-        int collegeid = userDAO.selectCollegeidByUserid(Integer.parseInt(userid)).getCollegeid();
+        int collegeid = userDAO.selectCollegeidByUserid(userid).getCollegeid();
 //        KeCheng kc = new KeCheng();
 //        kc.setCoursename(coursename);
 //        kc.setCollegeid(collegeid);
 //        boolean fh = keChengDAO.addKeCheng(kc);
         int courseid = keChengDAO.selectCourseidByCoursename(coursename).getCourseid();
-        String username = userDAO.selectUsernameByuserid(Integer.parseInt(userid)).getUsername();
+        String username = userDAO.selectUsernameByuserid(userid).getUsername();
         th.setUserid(userid);
         th.setUsername(username);
         th.setCoursename(coursename);
@@ -105,6 +157,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean addQianDao(String userid, int courseid, int classid, int qdflag, Timestamp qdstarttime, Timestamp qdstoptime,String qdname) {
+        boolean fh = qianDaoDAO.addQianDao(userid,courseid,classid,qdflag,qdstarttime,qdstoptime,qdname);
+        int qdid = qianDaoDAO.SelectQdByUseridandCourseidandClassidandQdname(userid,courseid,classid,qdname).getQdid();
+        ArrayList<User>users=userDAO.selectUserListByClassid(classid);
+        try {
+            for (User user: users) {
+                glbDAO.addStudent(classid,user.getUserid(),courseid,qdid,0,user.getUsername());
+            }
+        }catch (Exception ignored){}
+        return fh;
+    }
+
+    @Override
     public Boolean addUser(String userid, String username, String password, int classid,int key) {
         return userDAO.addUser(userid,username,password,classid,key);
     }
@@ -113,7 +178,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean AddClassXuanKe(String userid, int courseid,int classid) {
         XuanKe xk = new XuanKe();
-        String username = userDAO.selectUsernameByuserid(Integer.parseInt(userid)).getUsername();
+        String username = userDAO.selectUsernameByuserid(userid).getUsername();
         String coursename = keChengDAO.SelectCourseByCourseid(courseid).getCoursename();
         int collegeid = keChengDAO.SelectCourseByCourseid(courseid).getCollegeid();
         xk.setCollegeid(collegeid);
@@ -168,6 +233,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean UpdateClassByclassid(int classid, String classname) {
         return classDao.UpdateClassByclassid(classid,classname);
+    }
+
+    @Override
+    public Boolean UpdatGlb_qdztByUseridAndQdid(String userid, int qdid) {
+        return glbDAO.UpdatGlb_qdztByUseridAndQdid(userid,qdid);
     }
 
     @Override

@@ -18,24 +18,43 @@ import java.util.Random;
 
 @WebServlet(name = "UserServlet", value = "/UserServlet/*")
 public class UserServlet extends BaseServlet {
-    private UserService service = new UserServiceImpl();
+    private final UserService service = new UserServiceImpl();
     String msg="";
     protected void Checklogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         CheckLoginDAO ch=new CheckLoginDAO();
-        String username = request.getParameter("username");
+        String userid = request.getParameter("username");
         String password = request.getParameter("password");
         String code = request.getParameter("code");
         String yzcode = (String) session.getAttribute("piccode");
         if (code.equals(yzcode)) {
-            if (ch.CheckLoin(username,password)) {
-                request.setAttribute("username",username);
-                request.getRequestDispatcher("home.jsp").forward(request,response);
+            if (ch.CheckLoin(userid,password)) {
+                int key = service.selectKeyByuserid(userid);
+                String username = service.selectUsernameByuserid(userid);
+                session.setAttribute("msg","登录成功");
+                session.setAttribute("tzname","./home/home.jsp");
+                session.setAttribute("userid",userid);
+                session.setAttribute("username",username);
+                if (key==1){
+                    session.setAttribute("leftname","left.jsp");
+                } else if (key == 2) {
+                    session.setAttribute("leftname","Teacher_left.jsp");
+                } else if (key == 3) {
+                    session.setAttribute("leftname","Student_left.jsp");
+                }
+                request.getRequestDispatcher("Result.jsp").forward(request,response);
+//                request.getRequestDispatcher("home.jsp").forward(request,response);
             }else {
-                response.sendRedirect("login.jsp");
+                session.setAttribute("msg","用户名或者密码错误");
+                session.setAttribute("tzname","login.jsp");
+                request.getRequestDispatcher("Result.jsp").forward(request,response);
+//                response.sendRedirect("login.jsp");
             }
         }else {
-            response.sendRedirect("login.jsp");
+            session.setAttribute("msg","验证码错误");
+            session.setAttribute("tzname","login.jsp");
+            request.getRequestDispatcher("Result.jsp").forward(request,response);
+//            response.sendRedirect("login.jsp");
         }
     }
 
@@ -62,10 +81,10 @@ public class UserServlet extends BaseServlet {
         HttpSession session = request.getSession(true);
         session.setAttribute("piccode",sbf.toString());
         //禁止缓存
-        response.setHeader("Prama","no-cache");
-        response.setHeader("Coche=Control","no-cache");
-        response.setDateHeader("Expires",0);
-        response.setContentType("image/jpeg");
+//        response.setHeader("Prama","no-cache");
+//        response.setHeader("Coche=Control","no-cache");
+//        response.setDateHeader("Expires",0);
+//        response.setContentType("image/jpeg");
         //将bim图片返回浏览器
         ImageIO.write(bim,"JPG",response.getOutputStream());
         response.getOutputStream().close();
@@ -202,7 +221,7 @@ public class UserServlet extends BaseServlet {
 
             session.setAttribute("msg",msg);
             session.setAttribute("tzname","Class_XueYuanView.jsp");
-            request.getRequestDispatcher("Result.jsp").forward(request,response);
+            request.getRequestDispatcher("../Result.jsp").forward(request,response);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -608,5 +627,6 @@ public class UserServlet extends BaseServlet {
             e.printStackTrace();
         }
     }
+
 
 }

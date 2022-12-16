@@ -86,24 +86,24 @@ public class UserDAO extends util.GetConn{
         return result > 0;
     }
 
-    public User selectUsernameByuserid(int userid){
+    public User selectUsernameByuserid(String userid){
         conn=super.getConn(conn);
         sql="select * from user where userid=?";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,userid);
+            pstmt.setString(1,userid);
             rs = pstmt.executeQuery();
         }catch (SQLException e){
             e.printStackTrace();
         }
         return getByRS(rs).get(0);
     }
-    public User selectCollegeidByUserid(int userid){
+    public User selectCollegeidByUserid(String userid){
         conn = super.getConn(conn);
         sql="select * from user where userid=?";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,userid);
+            pstmt.setString(1,userid);
             rs = pstmt.executeQuery();
         }catch (SQLException e){
             e.printStackTrace();

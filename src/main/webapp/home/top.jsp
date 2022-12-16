@@ -25,7 +25,7 @@
 </head>
 <body>
 <table align="center">
-    <tr><td>欢迎使用系统</td></tr>
+    <tr><td><%=session.getAttribute("username")%>欢迎使用系统</td></tr>
 </table>
 </body>
 </html>

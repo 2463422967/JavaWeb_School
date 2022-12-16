@@ -30,7 +30,7 @@
 <form action="StudentView.jsp" method="post">
   <input type="text" name="keyword" size="80" value="${requestScope.keyword}" class="scan">
   <input type="submit" value="搜索" class="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="./UserServlet?action=Tz_addClass&collegeid=<%=request.getParameter("collegeid")%>">添加班级</a>
+  <a href="./UserServlet?action=Tz_addClass&collegeid=<%=request.getParameter("collegeid")%>" class="submit">添加班级</a>
 </form>
 <script type="text/javascript">
   function deleteClass(classid){

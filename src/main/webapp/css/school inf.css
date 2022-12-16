@@ -7,6 +7,15 @@
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
+}.submit2 {
+    width: 10%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
 }
 .scan{
     padding: 10px;
@@ -46,11 +55,9 @@ a{
     color: #0398dd;
     font-size: 20px;
 }
-
 a:hover{
     color: #3131fa;
 }
-
 td{
     /*border-bottom-style: solid;   底下有一条线   */
     background-color: #f3f3f3;
@@ -66,7 +73,7 @@ td{
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
-    margin-bottom: 15px;
+    margin-top: 10px;
 }
 
 .butt:hover{

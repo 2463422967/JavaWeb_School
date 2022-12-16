@@ -21,7 +21,7 @@
     </tr>
     <tr>
       <td width=30% align="center"><input type="text" name="username"  value="<%=request.getParameter("username")%>" class="scan"></td>
-      <td width=20% align="center"><input type="submit" value="修改" size="20" class="submit"></td>
+      <td width=20% align="center"><input type="submit" value="修改" size="20" class="butt"></td>
     </tr>
   </table>
 </form>

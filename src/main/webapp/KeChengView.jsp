@@ -24,7 +24,7 @@
 <form action="StudentView.jsp" method="post">
     <input type="text" name="keyword" size="80" value="${requestScope.keyword}" class="scan">
     <input type="submit" value="搜索" class="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="./UserServlet?action=Tz_addKeCheng&collegeid=<%=request.getParameter("collegeid")%>">添加课程</a>
+    <a href="./UserServlet?action=Tz_addKeCheng&collegeid=<%=request.getParameter("collegeid")%>" class="submit">添加课程</a>
 </form>
 <input type="button" value="返回上一级" onclick="history.go(-1);" class="butt">
 <table border="0" cellpadding="0" cellspacing="0">
